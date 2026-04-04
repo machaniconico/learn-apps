@@ -56,7 +56,7 @@ export default function LambdaPage() {
         <h1 className="text-3xl font-extrabold text-pink-400 mb-2">ラムダ式</h1>
         <div className="flex items-center gap-3 mb-3">
           <DifficultyBadge difficulty="intermediate" />
-          <span className="text-gray-500 text-sm">6レッスン</span>
+          <span className="text-gray-500 text-sm">8レッスン</span>
         </div>
         <p className="text-gray-400 leading-relaxed">
           Kotlinのラムダ式と高階関数を学びます。ラムダ構文、関数型、クロージャ、
@@ -64,10 +64,10 @@ export default function LambdaPage() {
         </p>
       </div>
       <div className="mb-8">
-        <ProgressBar categoryId="lambda" totalLessons={6} color="pink" />
+        <ProgressBar categoryId="lambda" totalLessons={8} color="pink" />
       </div>
       <section className="mb-12">
-        <h2 className="text-xl font-bold text-white mb-4">全6レッスン</h2>
+        <h2 className="text-xl font-bold text-white mb-4">全8レッスン</h2>
         <LessonList lessons={lessons} basePath="/learn/lambda" color="pink" categoryId="lambda" />
       </section>
       <section className="mb-10">

@@ -16,7 +16,7 @@ const CATEGORIES_WITH_COUNTS = [
   { id: "collections", name: "コレクション", lessonCount: 8 },
   { id: "strings", name: "文字列操作", lessonCount: 6 },
   { id: "null-safety", name: "Null安全", lessonCount: 6 },
-  { id: "lambdas", name: "ラムダ式", lessonCount: 6 },
+  { id: "lambda", name: "ラムダ式", lessonCount: 8 },
   { id: "scope-functions", name: "スコープ関数", lessonCount: 5 },
   { id: "classes", name: "クラス", lessonCount: 8 },
   { id: "inheritance", name: "継承", lessonCount: 6 },

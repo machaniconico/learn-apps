@@ -51,10 +51,10 @@ export default function JavaScriptLearnPage() {
         <p className="text-gray-400">Webページに動きとインタラクティブ性を加える言語を学びましょう</p>
       </div>
 
-      <ProgressBar categoryId="javascript" totalLessons={15} color="yellow" />
+      <ProgressBar categoryId="javascript" totalLessons={16} color="yellow" />
 
       <section className="mb-12">
-        <h2 className="text-xl font-bold text-white mb-4">全15レッスン</h2>
+        <h2 className="text-xl font-bold text-white mb-4">全16レッスン</h2>
         <LessonList lessons={JS_LESSONS} basePath="/learn/javascript" color="yellow" />
       </section>
 

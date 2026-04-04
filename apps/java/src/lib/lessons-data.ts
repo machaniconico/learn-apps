@@ -286,6 +286,7 @@ const ECOSYSTEM_LESSONS: Lesson[] = [
   { id: "garbage-collection", title: "ガベージコレクション", description: "GCの仕組みと主要なGCアルゴリズム", category: "ecosystem", order: 3 },
   { id: "popular-libraries", title: "主要ライブラリ", description: "Lombok・MapStruct・Apache Commonsなど", category: "ecosystem", order: 4 },
   { id: "best-practices", title: "ベストプラクティス", description: "Effective Javaの主要原則とコーディング規約", category: "ecosystem", order: 5 },
+  { id: "annotations", title: "アノテーション", description: "標準アノテーション、カスタムアノテーション定義、メタアノテーション、リフレクション処理", category: "ecosystem", order: 6 },
 ];
 
 // ── Category definitions ───────────────────────────────────────────────────────

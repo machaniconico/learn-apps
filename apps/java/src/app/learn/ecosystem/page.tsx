@@ -61,7 +61,7 @@ export default function EcosystemPage() {
         <h1 className="text-3xl font-extrabold text-blue-400 mb-2">Javaエコシステム</h1>
         <div className="flex items-center gap-3 mb-3">
           <DifficultyBadge difficulty="beginner" />
-          <span className="text-gray-500 text-sm">5レッスン</span>
+          <span className="text-gray-500 text-sm">6レッスン</span>
         </div>
         <p className="text-gray-400 leading-relaxed">
           Javaを取り巻くエコシステムを学びましょう。Java 8から最新バージョンまでの進化、
@@ -70,11 +70,11 @@ export default function EcosystemPage() {
       </div>
 
       <div className="mb-8">
-        <ProgressBar categoryId="ecosystem" totalLessons={5} color="blue" />
+        <ProgressBar categoryId="ecosystem" totalLessons={6} color="blue" />
       </div>
 
       <section className="mb-12">
-        <h2 className="text-xl font-bold text-white mb-4">全5レッスン</h2>
+        <h2 className="text-xl font-bold text-white mb-4">全6レッスン</h2>
         <LessonList lessons={lessons} basePath="/learn/ecosystem" color="blue" categoryId="ecosystem" />
       </section>
 

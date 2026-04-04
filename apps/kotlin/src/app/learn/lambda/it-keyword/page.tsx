@@ -3,20 +3,20 @@ import { LessonCompleteButton } from "@/components/lesson-complete-button";
 import { KotlinEditor } from "@/components/kotlin-editor";
 import { getAllLessons } from "@/lib/lessons-data";
 
-const lessons = getAllLessons("lambdas");
+const lessons = getAllLessons("lambda");
 
 export default function ItKeywordPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <div className="mb-8">
-        <span className="text-violet-400 text-sm font-semibold">ラムダ レッスン5</span>
+        <span className="text-pink-400 text-sm font-semibold">ラムダ式 レッスン7</span>
         <h1 className="text-3xl font-extrabold text-white mb-2">itキーワード</h1>
         <p className="text-gray-400">単一引数のラムダで使える暗黙のパラメータ名itを学びます。</p>
       </div>
       <section className="mb-10">
         <h2 className="text-xl font-bold text-white mb-3">itの基本</h2>
         <p className="text-gray-400 mb-4">
-          ラムダのパラメータが1つの場合、宣言と{'->'} を省略して<code className="text-violet-300">it</code>で参照できます。
+          ラムダのパラメータが1つの場合、宣言と{'->'} を省略して<code className="text-pink-300">it</code>で参照できます。
         </p>
         <KotlinEditor
           defaultCode={`fun main() {
@@ -82,9 +82,9 @@ fun main() {
         />
       </section>
       <div className="mb-8">
-        <LessonCompleteButton categoryId="lambdas" lessonId="it-keyword" />
+        <LessonCompleteButton categoryId="lambda" lessonId="it-keyword" />
       </div>
-      <LessonNav lessons={lessons} currentId="it-keyword" basePath="/learn/lambdas" />
+      <LessonNav lessons={lessons} currentId="it-keyword" basePath="/learn/lambda" />
     </div>
   );
 }

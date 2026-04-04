@@ -174,6 +174,7 @@ const numbersLessons: Lesson[] = [
   { id: "rational-complex", title: "Rational・Complex", description: "有理数・複素数", category: "numbers", order: 3 },
   { id: "math-module", title: "Mathモジュール", description: "数学関数の活用", category: "numbers", order: 4 },
   { id: "random", title: "乱数", description: "Random・rand・SecureRandom", category: "numbers", order: 5 },
+  { id: "ranges", title: "範囲オブジェクト", description: "Rangeクラスの活用", category: "numbers", order: 6 },
 ];
 
 const metaprogrammingLessons: Lesson[] = [

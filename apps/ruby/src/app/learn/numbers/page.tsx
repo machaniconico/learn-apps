@@ -47,7 +47,7 @@ export default function NumbersPage() {
         <h1 className="text-3xl font-extrabold text-green-400 mb-2">数値と演算</h1>
         <div className="flex items-center gap-3 mb-3">
           <DifficultyBadge difficulty="beginner" />
-          <span className="text-gray-500 text-sm">5レッスン</span>
+          <span className="text-gray-500 text-sm">6レッスン</span>
         </div>
         <p className="text-gray-400 leading-relaxed">
           Rubyの数値型を体系的に学びます。Integer の times/upto などのメソッド、Float の精度と注意点、Rational と Complex による精密計算、Math モジュールの数学関数、rand/Random/SecureRandom による乱数生成まで幅広くカバーします。
@@ -55,11 +55,11 @@ export default function NumbersPage() {
       </div>
 
       <div className="mb-8">
-        <ProgressBar categoryId="numbers" totalLessons={5} color="green" />
+        <ProgressBar categoryId="numbers" totalLessons={6} color="green" />
       </div>
 
       <section className="mb-12">
-        <h2 className="text-xl font-bold text-white mb-4">全5レッスン</h2>
+        <h2 className="text-xl font-bold text-white mb-4">全6レッスン</h2>
         <LessonList lessons={lessons} basePath="/learn/numbers" color="green" categoryId="numbers" />
       </section>
 

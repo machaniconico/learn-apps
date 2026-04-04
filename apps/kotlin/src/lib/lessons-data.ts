@@ -163,6 +163,8 @@ const LAMBDA_LESSONS: Lesson[] = [
   { id: "function-types", title: "関数型", description: "(Int) -> Stringのような関数型の宣言とnull許容関数型の扱い方を学びます。", category: "lambda", order: 4 },
   { id: "closures", title: "クロージャ", description: "ラムダが外部スコープの変数をキャプチャするクロージャの仕組みを学びます。", category: "lambda", order: 5 },
   { id: "inline-functions", title: "インライン関数", description: "inlineキーワードを使ってラムダのオーバーヘッドを削減する方法を学びます。", category: "lambda", order: 6 },
+  { id: "it-keyword", title: "itキーワード", description: "単一引数のラムダで使える暗黙のパラメータ名itの使い方と注意点を学びます。", category: "lambda", order: 7 },
+  { id: "with-apply-let", title: "with・apply・let", description: "スコープ関数with・apply・let・run・alsoの使い分けを学びます。", category: "lambda", order: 8 },
 ];
 
 // 14. collection-ops - コレクション操作
