@@ -1,0 +1,473 @@
+export interface GlossaryTerm {
+  term: string;
+  reading?: string;
+  description: string;
+  category: string;
+}
+
+export const GLOSSARY_TERMS: GlossaryTerm[] = [
+  // ── 基礎 ────────────────────────────────────────────────────────────────────
+  {
+    term: "変数",
+    reading: "へんすう",
+    description: "データを格納するための名前付きの記憶領域。C++では宣言時に型を指定するか、autoキーワードで型推論を利用する。",
+    category: "基礎",
+  },
+  {
+    term: "型",
+    reading: "かた",
+    description: "変数やオブジェクトが保持するデータの種類を定義する仕組み。C++は静的型付け言語であり、コンパイル時に型チェックが行われる。",
+    category: "基礎",
+  },
+  {
+    term: "コンパイル",
+    reading: "こんぱいる",
+    description: "ソースコードを機械語（オブジェクトファイル）に変換する工程。g++やclang++などのコンパイラが使われる。",
+    category: "基礎",
+  },
+  {
+    term: "リンカ",
+    reading: "りんか",
+    description: "コンパイルで生成されたオブジェクトファイルやライブラリを結合し、実行可能ファイルを生成するプログラム。",
+    category: "基礎",
+  },
+  {
+    term: "ヘッダファイル",
+    reading: "へっだふぁいる",
+    description: "関数やクラスの宣言をまとめたファイル（.h / .hpp）。#includeディレクティブで読み込み、コードの分割と再利用を実現する。",
+    category: "基礎",
+  },
+  {
+    term: "名前空間",
+    reading: "なまえくうかん",
+    description: "識別子の衝突を防ぐためのスコープ。namespaceキーワードで定義し、std::coutのように::演算子でアクセスする。",
+    category: "基礎",
+  },
+  {
+    term: "auto",
+    reading: "おーと",
+    description: "コンパイラが右辺の式から自動的に型を推論するキーワード。C++11以降で利用可能。auto x = 42; でint型と推論される。",
+    category: "基礎",
+  },
+  {
+    term: "const",
+    reading: "こんすと",
+    description: "変数やメンバー関数を変更不可にするキーワード。const int x = 10; で定数を宣言。関数のconst修飾でオブジェクトを変更しないことを保証する。",
+    category: "基礎",
+  },
+  {
+    term: "constexpr",
+    reading: "こんすとえくすぷれす",
+    description: "コンパイル時に評価可能な定数式を定義するキーワード。constexpr int square(int n) { return n * n; } のように関数にも使える。",
+    category: "基礎",
+  },
+  {
+    term: "列挙型",
+    reading: "れっきょがた",
+    description: "名前付き整数定数の集合。enum class（スコープ付き列挙型）が推奨され、型安全な定数として使う。",
+    category: "基礎",
+  },
+  {
+    term: "型変換",
+    reading: "かたへんかん",
+    description: "ある型から別の型に値を変換すること。static_cast・dynamic_cast・const_cast・reinterpret_castの4種類のキャストがある。",
+    category: "基礎",
+  },
+  {
+    term: "演算子",
+    reading: "えんざんし",
+    description: "値に対して操作を行う記号。算術(+,-,*,/)・比較(==,!=,<,>)・論理(&&,||,!)・ビット(&,|,^,~)などがある。",
+    category: "基礎",
+  },
+  // ── ポインタ・参照 ──────────────────────────────────────────────────────────
+  {
+    term: "ポインタ",
+    reading: "ぽいんた",
+    description: "メモリアドレスを格納する変数。int* p = &x; のように宣言し、*pでデリファレンス（値の取得）を行う。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "デリファレンス",
+    reading: "でりふぁれんす",
+    description: "ポインタが指すアドレスの値にアクセスする操作。*演算子を使い、*p = 10; のように値の読み書きを行う。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "nullptr",
+    reading: "なるぽいんた",
+    description: "C++11で導入されたヌルポインタリテラル。従来のNULLや0の代わりに使い、型安全なヌルポインタを表す。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "参照",
+    reading: "さんしょう",
+    description: "既存の変数に別名を付ける仕組み。int& ref = x; のように宣言し、refを通じてxを直接操作できる。NULLにはできない。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "右辺値参照",
+    reading: "うへんちさんしょう",
+    description: "一時オブジェクトをバインドする参照（T&&）。ムーブセマンティクスの基盤であり、不要なコピーを避けてパフォーマンスを向上させる。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "const参照",
+    reading: "こんすとさんしょう",
+    description: "読み取り専用の参照（const T&）。関数引数でコピーを避けつつ変更を防ぐために頻繁に使われる。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "ダングリングポインタ",
+    reading: "だんぐりんぐぽいんた",
+    description: "解放済みまたは無効なメモリを指すポインタ。アクセスすると未定義動作となり、深刻なバグの原因になる。",
+    category: "ポインタ・参照",
+  },
+  {
+    term: "void*",
+    reading: "ぼいどぽいんた",
+    description: "任意の型のアドレスを格納できる汎用ポインタ。使用時にはキャストが必要。C言語との互換性で使われることが多い。",
+    category: "ポインタ・参照",
+  },
+  // ── OOP ──────────────────────────────────────────────────────────────────
+  {
+    term: "クラス",
+    reading: "くらす",
+    description: "データ（メンバ変数）と処理（メンバ関数）をまとめた型定義。classキーワードで宣言し、デフォルトのアクセスはprivate。",
+    category: "OOP",
+  },
+  {
+    term: "構造体",
+    reading: "こうぞうたい",
+    description: "classとほぼ同じだが、デフォルトのアクセスがpublic。POD（Plain Old Data）やシンプルなデータの集約に使われる。",
+    category: "OOP",
+  },
+  {
+    term: "コンストラクタ",
+    reading: "こんすとらくた",
+    description: "オブジェクト生成時に呼ばれる特殊なメンバ関数。初期化リストを使ってメンバ変数を効率的に初期化できる。",
+    category: "OOP",
+  },
+  {
+    term: "デストラクタ",
+    reading: "ですとらくた",
+    description: "オブジェクト破棄時に呼ばれる特殊なメンバ関数（~ClassName()）。リソースの解放に使い、RAIIパターンの基盤となる。",
+    category: "OOP",
+  },
+  {
+    term: "継承",
+    reading: "けいしょう",
+    description: "既存クラスの機能を引き継いで新しいクラスを作る仕組み。C++はpublic・protected・private継承および多重継承をサポートする。",
+    category: "OOP",
+  },
+  {
+    term: "仮想関数",
+    reading: "かそうかんすう",
+    description: "virtualキーワードで宣言されたメンバ関数。ポインタや参照を通じて呼び出すと、実行時の型に応じた関数が呼ばれる（動的ディスパッチ）。",
+    category: "OOP",
+  },
+  {
+    term: "純粋仮想関数",
+    reading: "じゅんすいかそうかんすう",
+    description: "= 0 で宣言された仮想関数。実装を持たず、派生クラスでの実装を強制する。純粋仮想関数を持つクラスは抽象クラスとなる。",
+    category: "OOP",
+  },
+  {
+    term: "ポリモーフィズム",
+    reading: "ぽりもーふぃずむ",
+    description: "基底クラスのポインタや参照で派生クラスのオブジェクトを操作し、実行時に適切な関数が呼ばれる仕組み。virtual/overrideで実現する。",
+    category: "OOP",
+  },
+  {
+    term: "カプセル化",
+    reading: "かぷせるか",
+    description: "データとその操作をクラス内にまとめ、アクセス指定子（public/protected/private）で外部からの直接アクセスを制限する原則。",
+    category: "OOP",
+  },
+  {
+    term: "多重継承",
+    reading: "たじゅうけいしょう",
+    description: "複数の基底クラスから同時に継承する機能。ダイヤモンド継承問題にはvirtual継承で対処する。",
+    category: "OOP",
+  },
+  {
+    term: "演算子オーバーロード",
+    reading: "えんざんしおーばーろーど",
+    description: "クラスに対して+, -, ==, <<などの演算子の動作を独自定義する機能。operator+()のような特殊な関数で実装する。",
+    category: "OOP",
+  },
+  {
+    term: "friend",
+    reading: "ふれんど",
+    description: "クラスのprivate/protectedメンバへのアクセスを特定の関数やクラスに許可するキーワード。カプセル化を部分的に緩和する。",
+    category: "OOP",
+  },
+  // ── テンプレート ──────────────────────────────────────────────────────────
+  {
+    term: "テンプレート",
+    reading: "てんぷれーと",
+    description: "型パラメータを使って汎用的な関数やクラスを定義する仕組み。template<typename T>で宣言し、コンパイル時に具体的な型に展開される。",
+    category: "テンプレート",
+  },
+  {
+    term: "関数テンプレート",
+    reading: "かんすうてんぷれーと",
+    description: "型に依存しない汎用的な関数。template<typename T> T max(T a, T b) のように定義し、呼び出し時に型が推論される。",
+    category: "テンプレート",
+  },
+  {
+    term: "クラステンプレート",
+    reading: "くらすてんぷれーと",
+    description: "型パラメータを持つクラス定義。std::vector<int>のように使用時に具体的な型を指定してインスタンス化する。",
+    category: "テンプレート",
+  },
+  {
+    term: "テンプレート特殊化",
+    reading: "てんぷれーととくしゅか",
+    description: "特定の型に対してテンプレートの別実装を提供する機能。完全特殊化と部分特殊化がある。",
+    category: "テンプレート",
+  },
+  {
+    term: "SFINAE",
+    reading: "すふぃねー",
+    description: "Substitution Failure Is Not An Error。テンプレート引数の置換に失敗してもコンパイルエラーにならず、別のオーバーロードが試される規則。",
+    category: "テンプレート",
+  },
+  {
+    term: "コンセプト",
+    reading: "こんせぷと",
+    description: "C++20で導入されたテンプレートパラメータに対する制約。template<std::integral T>のように型に要件を課し、エラーメッセージを改善する。",
+    category: "テンプレート",
+  },
+  {
+    term: "可変長テンプレート",
+    reading: "かへんちょうてんぷれーと",
+    description: "任意の数のテンプレート引数を受け取るテンプレート（template<typename... Args>）。再帰やフォールド式で展開する。",
+    category: "テンプレート",
+  },
+  {
+    term: "型特性",
+    reading: "かたとくせい",
+    description: "コンパイル時に型の性質を調べる仕組み（<type_traits>）。std::is_integral<T>, std::is_pointer<T>などで条件分岐に使う。",
+    category: "テンプレート",
+  },
+  // ── STL ──────────────────────────────────────────────────────────────────
+  {
+    term: "STL",
+    reading: "えすてぃーえる",
+    description: "Standard Template Library。コンテナ・イテレータ・アルゴリズム・関数オブジェクトから構成される、C++標準ライブラリの中核部分。",
+    category: "STL",
+  },
+  {
+    term: "コンテナ",
+    reading: "こんてな",
+    description: "データを格納するデータ構造の総称。vector・list・map・set・unordered_mapなど、用途に応じた多様なコンテナが提供される。",
+    category: "STL",
+  },
+  {
+    term: "vector",
+    reading: "べくたー",
+    description: "動的配列。連続したメモリ領域に要素を格納し、push_backで末尾に追加できる。ランダムアクセスO(1)、末尾挿入の償却O(1)。",
+    category: "STL",
+  },
+  {
+    term: "map",
+    reading: "まっぷ",
+    description: "キーと値のペアを格納する連想コンテナ。赤黒木で実装され、キーの昇順で自動ソートされる。検索・挿入・削除がO(log n)。",
+    category: "STL",
+  },
+  {
+    term: "unordered_map",
+    reading: "あんおーだーどまっぷ",
+    description: "ハッシュテーブルベースの連想コンテナ。順序は保証されないが、平均O(1)の高速な検索・挿入が可能。",
+    category: "STL",
+  },
+  {
+    term: "イテレータ",
+    reading: "いてれーた",
+    description: "コンテナの要素を順次アクセスするためのオブジェクト。begin()〜end()の範囲で使い、ポインタに似たインターフェースを持つ。",
+    category: "STL",
+  },
+  {
+    term: "アルゴリズム",
+    reading: "あるごりずむ",
+    description: "<algorithm>ヘッダに含まれる汎用関数群。sort・find・transform・accumulate・copy_ifなど、イテレータを介してコンテナを操作する。",
+    category: "STL",
+  },
+  {
+    term: "ranges",
+    reading: "れんじーず",
+    description: "C++20で追加されたパイプライン形式のアルゴリズム。views::filter | views::transformのように連鎖的にデータを加工できる。",
+    category: "STL",
+  },
+  {
+    term: "string",
+    reading: "すとりんぐ",
+    description: "std::stringクラス。動的な文字列を管理し、結合(+)・部分文字列(substr)・検索(find)など豊富なメソッドを提供する。",
+    category: "STL",
+  },
+  {
+    term: "string_view",
+    reading: "すとりんぐびゅー",
+    description: "C++17で追加された読み取り専用の文字列参照。コピーなしで文字列を参照でき、関数引数としてstring/const char*の両方を受け取れる。",
+    category: "STL",
+  },
+  // ── メモリ ──────────────────────────────────────────────────────────────────
+  {
+    term: "RAII",
+    reading: "あーるえーあいあい",
+    description: "Resource Acquisition Is Initialization。リソースの取得をオブジェクトの初期化に、解放をデストラクタに結びつけるイディオム。",
+    category: "メモリ",
+  },
+  {
+    term: "スマートポインタ",
+    reading: "すまーとぽいんた",
+    description: "メモリ管理を自動化するポインタラッパー。unique_ptr（単独所有）・shared_ptr（共有所有）・weak_ptr（弱参照）の3種がある。",
+    category: "メモリ",
+  },
+  {
+    term: "unique_ptr",
+    reading: "ゆにーくぽいんた",
+    description: "単独所有のスマートポインタ。コピー不可・ムーブのみ可能で、スコープを抜けると自動的にメモリを解放する。",
+    category: "メモリ",
+  },
+  {
+    term: "shared_ptr",
+    reading: "しぇあーどぽいんた",
+    description: "参照カウント方式の共有所有スマートポインタ。最後のshared_ptrが破棄されるとメモリが解放される。",
+    category: "メモリ",
+  },
+  {
+    term: "weak_ptr",
+    reading: "うぃーくぽいんた",
+    description: "shared_ptrの循環参照を防ぐための弱参照ポインタ。参照カウントを増やさず、lock()でshared_ptrに変換して使う。",
+    category: "メモリ",
+  },
+  {
+    term: "メモリリーク",
+    reading: "めもりりーく",
+    description: "確保したメモリが解放されず、プログラムが使用可能なメモリを徐々に失う現象。スマートポインタやRAIIで防止する。",
+    category: "メモリ",
+  },
+  {
+    term: "ヒープ",
+    reading: "ひーぷ",
+    description: "new/deleteで動的に確保・解放するメモリ領域。寿命をプログラマが制御でき、大きなデータの格納に適する。",
+    category: "メモリ",
+  },
+  {
+    term: "スタック",
+    reading: "すたっく",
+    description: "ローカル変数や関数呼び出し情報が格納されるメモリ領域。LIFO方式で自動管理され、スコープを抜けると自動解放される。",
+    category: "メモリ",
+  },
+  {
+    term: "new / delete",
+    reading: "にゅー / でりーと",
+    description: "ヒープメモリの動的確保と解放を行う演算子。モダンC++ではスマートポインタ（make_unique等）を使うことが推奨される。",
+    category: "メモリ",
+  },
+  {
+    term: "ムーブセマンティクス",
+    reading: "むーぶせまんてぃくす",
+    description: "オブジェクトのリソースをコピーではなく移動する仕組み。std::moveで右辺値参照に変換し、ムーブコンストラクタ/代入演算子で効率的に転送する。",
+    category: "メモリ",
+  },
+  // ── マルチスレッド ──────────────────────────────────────────────────────────
+  {
+    term: "スレッド",
+    reading: "すれっど",
+    description: "並行処理の実行単位。<thread>ヘッダのstd::threadで作成し、join()またはdetach()で管理する。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "mutex",
+    reading: "みゅーてっくす",
+    description: "排他制御の同期プリミティブ。lock()/unlock()でクリティカルセクションを保護し、データ競合を防ぐ。lock_guardと併用が推奨。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "lock_guard",
+    reading: "ろっくがーど",
+    description: "RAIIスタイルのmutexロック管理。コンストラクタでロック、デストラクタでアンロックするため、例外安全にmutexを扱える。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "条件変数",
+    reading: "じょうけんへんすう",
+    description: "std::condition_variable。スレッド間の待機と通知の仕組み。wait()で条件を待ち、notify_one()/notify_all()で通知する。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "atomic",
+    reading: "あとみっく",
+    description: "アトミック操作を提供する型テンプレート。std::atomic<int>のように使い、ロックなしでスレッドセーフな読み書きを実現する。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "future / promise",
+    reading: "ふゅーちゃー / ぷろみす",
+    description: "非同期処理の結果を受け渡す仕組み。promiseで値を設定し、futureで結果を取得する。std::asyncと組み合わせて使うことが多い。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "データ競合",
+    reading: "でーたきょうごう",
+    description: "複数スレッドが同時に同じデータへ読み書きすることで発生する未定義動作。mutexやatomicで防止する。",
+    category: "マルチスレッド",
+  },
+  {
+    term: "デッドロック",
+    reading: "でっどろっく",
+    description: "複数スレッドが互いのロック解放を待ち合い、処理が停止する状態。std::lock()やロック順序の統一で回避する。",
+    category: "マルチスレッド",
+  },
+  // ── ビルド ──────────────────────────────────────────────────────────────────
+  {
+    term: "プリプロセッサ",
+    reading: "ぷりぷろせっさ",
+    description: "コンパイル前にソースコードを加工する処理系。#include・#define・#ifdef・#pragmaなどのディレクティブを処理する。",
+    category: "ビルド",
+  },
+  {
+    term: "Makefile",
+    reading: "めいくふぁいる",
+    description: "makeコマンドで使うビルドルール定義ファイル。ソースの依存関係とコンパイル手順を記述し、変更されたファイルだけを再ビルドする。",
+    category: "ビルド",
+  },
+  {
+    term: "CMake",
+    reading: "しーめいく",
+    description: "クロスプラットフォームのビルドシステムジェネレータ。CMakeLists.txtにビルド設定を記述し、MakefileやVisual Studioプロジェクトを自動生成する。",
+    category: "ビルド",
+  },
+  {
+    term: "インクルードガード",
+    reading: "いんくるーどがーど",
+    description: "ヘッダファイルの多重読み込みを防ぐ仕組み。#ifndef/#define/#endifパターンまたは#pragma onceで実現する。",
+    category: "ビルド",
+  },
+  {
+    term: "静的リンク",
+    reading: "せいてきりんく",
+    description: "ライブラリのコードを実行ファイルに直接埋め込むリンク方式。配布が容易だがファイルサイズが大きくなる。.a/.libファイル。",
+    category: "ビルド",
+  },
+  {
+    term: "動的リンク",
+    reading: "どうてきりんく",
+    description: "実行時にライブラリを読み込むリンク方式。メモリ効率が良くライブラリの更新が容易。.so/.dll/.dylibファイル。",
+    category: "ビルド",
+  },
+  {
+    term: "コンパイルオプション",
+    reading: "こんぱいるおぷしょん",
+    description: "コンパイラに渡すフラグ。-Wall（警告）・-O2（最適化）・-std=c++20（規格指定）・-g（デバッグ情報）などが代表的。",
+    category: "ビルド",
+  },
+  {
+    term: "パッケージマネージャ",
+    reading: "ぱっけーじまねーじゃ",
+    description: "外部ライブラリの取得・管理ツール。vcpkg・Conan・Hunter などがC++エコシステムで広く使われている。",
+    category: "ビルド",
+  },
+];

@@ -1,0 +1,19 @@
+{
+  "name": "learn-apps",
+  "private": true,
+  "packageManager": "npm@11.11.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "build:all": "turbo build",
+    "deploy:all": "turbo deploy"
+  },
+  "devDependencies": {
+    "turbo": "^2"
+  }
+}
