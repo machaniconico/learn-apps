@@ -30,6 +30,7 @@ const basicsLessons: Lesson[] = [
   { id: "numeric-types", title: "数値型", description: "Int・Double・Float・型変換", category: "basics", order: 10 },
   { id: "type-conversion", title: "型変換", description: "Int()・Double()・String()・明示的キャスト", category: "basics", order: 11 },
   { id: "string-basics", title: "文字列の基本", description: "Stringリテラル・連結・isEmpty", category: "basics", order: 12 },
+  { id: "tuples", title: "タプル", description: "複数の値をまとめるタプル型", category: "basics", order: 13 },
 ];
 
 const controlLessons: Lesson[] = [
@@ -54,6 +55,7 @@ const functionsLessons: Lesson[] = [
   { id: "inout", title: "inout引数", description: "参照渡しで値を変更", category: "functions", order: 6 },
   { id: "function-types", title: "関数型", description: "関数を変数として扱う", category: "functions", order: 7 },
   { id: "nested-functions", title: "ネスト関数", description: "関数内に関数を定義", category: "functions", order: 8 },
+  { id: "throwing-functions", title: "throwsする関数", description: "エラーを投げる関数の定義と呼び出し", category: "functions", order: 9 },
 ];
 
 const collectionsLessons: Lesson[] = [
@@ -64,6 +66,7 @@ const collectionsLessons: Lesson[] = [
   { id: "transformations", title: "変換", description: "map・flatMap・compactMap", category: "collections", order: 5 },
   { id: "sorting", title: "ソート", description: "sorted・sort・カスタム比較", category: "collections", order: 6 },
   { id: "filtering", title: "フィルタリング", description: "filter・reduce・contains", category: "collections", order: 7 },
+  { id: "lazy-sequences", title: "遅延シーケンス", description: "lazyによる遅延評価コレクション", category: "collections", order: 8 },
 ];
 
 const stringsLessons: Lesson[] = [
@@ -73,6 +76,8 @@ const stringsLessons: Lesson[] = [
   { id: "substrings", title: "部分文字列", description: "Substring型とインデックス操作", category: "strings", order: 4 },
   { id: "unicode", title: "Unicode", description: "Unicode対応とCharacter操作", category: "strings", order: 5 },
   { id: "multiline", title: "複数行文字列", description: "\"\"\"による複数行リテラル", category: "strings", order: 6 },
+  { id: "regex", title: "正規表現", description: "Regex型とRegexBuilderによるパターンマッチ", category: "strings", order: 7 },
+  { id: "formatting", title: "フォーマット", description: "formatted()とFormatStyleによる文字列整形", category: "strings", order: 8 },
 ];
 
 const optionalsLessons: Lesson[] = [
@@ -93,6 +98,7 @@ const closuresLessons: Lesson[] = [
   { id: "autoclosure", title: "オートクロージャ", description: "@autoclosureによる遅延評価", category: "closures", order: 5 },
   { id: "higher-order", title: "高階関数", description: "map・filter・reduceの活用", category: "closures", order: 6 },
   { id: "shorthand", title: "省略記法", description: "$0・$1による引数省略", category: "closures", order: 7 },
+  { id: "memory-management", title: "クロージャとメモリ", description: "クロージャによる循環参照の回避", category: "closures", order: 8 },
 ];
 
 const structsLessons: Lesson[] = [
@@ -133,6 +139,8 @@ const protocolsLessons: Lesson[] = [
   { id: "delegation", title: "デリゲートパターン", description: "delegateによる委譲", category: "protocols", order: 4 },
   { id: "associated-types", title: "関連型", description: "associatedtypeの定義と利用", category: "protocols", order: 5 },
   { id: "existential", title: "存在型", description: "anyキーワードと存在型", category: "protocols", order: 6 },
+  { id: "composition", title: "プロトコル合成", description: "Protocol1 & Protocol2による複数プロトコル合成", category: "protocols", order: 7 },
+  { id: "protocol-oriented", title: "プロトコル指向", description: "POP（Protocol-Oriented Programming）の実践", category: "protocols", order: 8 },
 ];
 
 const extensionsLessons: Lesson[] = [
@@ -142,6 +150,8 @@ const extensionsLessons: Lesson[] = [
   { id: "initializers", title: "イニシャライザの追加", description: "既存型に初期化処理を追加", category: "extensions", order: 4 },
   { id: "protocol-conformance", title: "プロトコル準拠の追加", description: "extensionでプロトコルを採用", category: "extensions", order: 5 },
   { id: "conditional", title: "条件付き拡張", description: "whereによる条件付き拡張", category: "extensions", order: 6 },
+  { id: "subscripts", title: "サブスクリプトの追加", description: "extensionでsubscriptを追加", category: "extensions", order: 7 },
+  { id: "nested-types", title: "ネスト型の追加", description: "extensionでネスト型を定義", category: "extensions", order: 8 },
 ];
 
 const genericsLessons: Lesson[] = [
@@ -151,6 +161,8 @@ const genericsLessons: Lesson[] = [
   { id: "constraints", title: "型制約", description: "プロトコルによる型パラメータ制約", category: "generics", order: 4 },
   { id: "associated-types", title: "関連型との組み合わせ", description: "プロトコルとジェネリクス", category: "generics", order: 5 },
   { id: "where-clause", title: "where句", description: "複雑な型制約の表現", category: "generics", order: 6 },
+  { id: "type-erasure", title: "型消去", description: "AnyPublisher等の型消去パターン", category: "generics", order: 7 },
+  { id: "generic-subscripts", title: "ジェネリックサブスクリプト", description: "subscriptでジェネリクスを活用", category: "generics", order: 8 },
 ];
 
 const errorHandlingLessons: Lesson[] = [
@@ -160,6 +172,8 @@ const errorHandlingLessons: Lesson[] = [
   { id: "custom-errors", title: "カスタムエラー", description: "Errorプロトコルの実装", category: "error-handling", order: 4 },
   { id: "result-type", title: "Result型", description: "Result<Success,Failure>の活用", category: "error-handling", order: 5 },
   { id: "error-propagation", title: "エラーの伝播", description: "rethrowsによるエラー転送", category: "error-handling", order: 6 },
+  { id: "typed-throws", title: "型付きthrows", description: "throws(ErrorType)による具体的エラー型指定", category: "error-handling", order: 7 },
+  { id: "error-chaining", title: "エラーの連鎖", description: "underlyingErrorとエラーラッピング", category: "error-handling", order: 8 },
 ];
 
 const concurrencyLessons: Lesson[] = [
@@ -169,6 +183,8 @@ const concurrencyLessons: Lesson[] = [
   { id: "async-let", title: "async let", description: "並行処理の結合", category: "concurrency", order: 4 },
   { id: "task-groups", title: "TaskGroup", description: "動的な並行タスクグループ", category: "concurrency", order: 5 },
   { id: "sendable", title: "Sendable", description: "並行処理での型安全性", category: "concurrency", order: 6 },
+  { id: "async-sequence", title: "AsyncSequence", description: "非同期シーケンスの反復処理", category: "concurrency", order: 7 },
+  { id: "continuations", title: "Continuation", description: "withCheckedContinuationによるコールバック変換", category: "concurrency", order: 8 },
 ];
 
 const memoryLessons: Lesson[] = [
@@ -177,6 +193,9 @@ const memoryLessons: Lesson[] = [
   { id: "retain-cycles", title: "循環参照", description: "メモリリークの原因と検出", category: "memory", order: 3 },
   { id: "capture-lists", title: "キャプチャリスト", description: "[weak self]と[unowned self]の使い方", category: "memory", order: 4 },
   { id: "value-vs-reference", title: "値型と参照型", description: "structとclassのメモリ挙動の違い", category: "memory", order: 5 },
+  { id: "copy-on-write", title: "Copy-on-Write", description: "値型の効率的なコピー戦略", category: "memory", order: 6 },
+  { id: "autorelease-pool", title: "Autoreleaseプール", description: "autoreleasepool によるメモリ管理", category: "memory", order: 7 },
+  { id: "memory-debugging", title: "メモリデバッグ", description: "Instruments Leaks/Allocationsでメモリ問題を検出", category: "memory", order: 8 },
 ];
 
 const swiftuiLessons: Lesson[] = [
@@ -187,6 +206,7 @@ const swiftuiLessons: Lesson[] = [
   { id: "observable", title: "@Observable", description: "@Observable/@Bindableによる状態管理", category: "swiftui", order: 5 },
   { id: "navigation", title: "ナビゲーション", description: "NavigationStackとNavigationLink", category: "swiftui", order: 6 },
   { id: "lists", title: "リストとForEach", description: "List/ForEachでデータを表示", category: "swiftui", order: 7 },
+  { id: "animations", title: "アニメーション", description: "withAnimation・transition・matchedGeometryEffect", category: "swiftui", order: 8 },
 ];
 
 const propertyWrappersLessons: Lesson[] = [
@@ -195,6 +215,9 @@ const propertyWrappersLessons: Lesson[] = [
   { id: "custom", title: "カスタムWrapper作成", description: "独自のProperty Wrapperを実装する", category: "property-wrappers", order: 3 },
   { id: "environment", title: "@Environment", description: "環境値へのアクセスと伝播", category: "property-wrappers", order: 4 },
   { id: "app-storage", title: "@AppStorage", description: "UserDefaultsとの連携", category: "property-wrappers", order: 5 },
+  { id: "scene-storage", title: "@SceneStorage", description: "シーン単位の状態保存と復元", category: "property-wrappers", order: 6 },
+  { id: "focus-state", title: "@FocusState", description: "フォーカス管理とキーボード制御", category: "property-wrappers", order: 7 },
+  { id: "projected-value", title: "projectedValue", description: "$prefixによる射影値の活用", category: "property-wrappers", order: 8 },
 ];
 
 const testingLessons: Lesson[] = [
@@ -204,6 +227,8 @@ const testingLessons: Lesson[] = [
   { id: "mocking", title: "モック", description: "プロトコルベースのモック実装", category: "testing", order: 4 },
   { id: "ui-testing", title: "UIテスト", description: "XCUITestでUIを自動テスト", category: "testing", order: 5 },
   { id: "tdd", title: "TDD", description: "Red-Green-RefactorサイクルによるTDD", category: "testing", order: 6 },
+  { id: "swift-testing", title: "Swift Testing", description: "@Test・#expect による新テストフレームワーク", category: "testing", order: 7 },
+  { id: "performance-testing", title: "パフォーマンステスト", description: "measure()によるベンチマークテスト", category: "testing", order: 8 },
 ];
 
 const patternsLessons: Lesson[] = [
@@ -213,6 +238,8 @@ const patternsLessons: Lesson[] = [
   { id: "dependency-injection", title: "依存性注入", description: "プロトコルベースのDI実装", category: "patterns", order: 4 },
   { id: "coordinator", title: "Coordinator", description: "画面遷移を管理するCoordinatorパターン", category: "patterns", order: 5 },
   { id: "factory", title: "Factory", description: "オブジェクト生成を抽象化するFactoryパターン", category: "patterns", order: 6 },
+  { id: "builder", title: "Builder", description: "複雑なオブジェクトを段階的に構築するBuilderパターン", category: "patterns", order: 7 },
+  { id: "strategy", title: "Strategy", description: "アルゴリズムを交換可能にするStrategyパターン", category: "patterns", order: 8 },
 ];
 
 const spmLessons: Lesson[] = [
@@ -221,6 +248,9 @@ const spmLessons: Lesson[] = [
   { id: "dependencies", title: "依存関係の追加", description: "Package.swiftへの外部依存パッケージの追加", category: "spm", order: 3 },
   { id: "plugins", title: "プラグイン", description: "ビルドツールプラグインとコマンドプラグイン", category: "spm", order: 4 },
   { id: "targets", title: "ターゲットとプロダクト", description: "targets・products・testTargetsの設定", category: "spm", order: 5 },
+  { id: "publishing", title: "パッケージの公開", description: "GitHubリポジトリでの公開とバージョンタグ", category: "spm", order: 6 },
+  { id: "resources", title: "リソースの追加", description: "Bundle.moduleによるリソースファイルの同梱", category: "spm", order: 7 },
+  { id: "versioning", title: "バージョニング", description: "Semantic Versioningとバージョン解決ルール", category: "spm", order: 8 },
 ];
 
 const algorithmsLessons: Lesson[] = [
@@ -230,6 +260,8 @@ const algorithmsLessons: Lesson[] = [
   { id: "stack-queue", title: "スタックとキュー", description: "配列を使ったStack・Queueの実装", category: "algorithms", order: 4 },
   { id: "linked-list", title: "連結リスト", description: "クラスによるLinkedListの実装", category: "algorithms", order: 5 },
   { id: "hash-table", title: "ハッシュテーブル", description: "DictionaryとカスタムHashableの実装", category: "algorithms", order: 6 },
+  { id: "tree", title: "木構造", description: "二分木・二分探索木の実装と走査", category: "algorithms", order: 7 },
+  { id: "graph", title: "グラフ", description: "隣接リスト・BFS・DFSの実装", category: "algorithms", order: 8 },
 ];
 
 const advancedLessons: Lesson[] = [
@@ -239,6 +271,8 @@ const advancedLessons: Lesson[] = [
   { id: "opaque-types", title: "Opaque型", description: "some Protocolによるopaque戻り値型", category: "advanced", order: 4 },
   { id: "existential-types", title: "Existential型", description: "any Protocolによるexistential型", category: "advanced", order: 5 },
   { id: "metatypes", title: "メタタイプ", description: "Type.self・.Type・メタタイプの活用", category: "advanced", order: 6 },
+  { id: "dynamic-member", title: "@dynamicMemberLookup", description: "動的メンバーアクセスの実装", category: "advanced", order: 7 },
+  { id: "dynamic-callable", title: "@dynamicCallable", description: "動的呼び出し可能な型の実装", category: "advanced", order: 8 },
 ];
 
 const iosLessons: Lesson[] = [
@@ -249,6 +283,7 @@ const iosLessons: Lesson[] = [
   { id: "table-view", title: "UITableView", description: "UITableViewDataSourceとセルの実装", category: "ios", order: 5 },
   { id: "navigation-controller", title: "UINavigationController", description: "画面遷移とナビゲーションスタック", category: "ios", order: 6 },
   { id: "core-data", title: "Core Data", description: "CoreDataスタックとNSManagedObjectの基本", category: "ios", order: 7 },
+  { id: "networking", title: "URLSession", description: "URLSessionによるHTTP通信とJSONデコード", category: "ios", order: 8 },
 ];
 
 const ecosystemLessons: Lesson[] = [
@@ -257,6 +292,9 @@ const ecosystemLessons: Lesson[] = [
   { id: "instruments", title: "Instruments", description: "Time Profiler・Leaks・Allocationsでプロファイリング", category: "ecosystem", order: 3 },
   { id: "swift-format", title: "コード品質ツール", description: "swift-format・SwiftLintによるコード品質管理", category: "ecosystem", order: 4 },
   { id: "ci-cd", title: "CI/CD", description: "Xcode Cloud・GitHub ActionsによるSwift CI/CD", category: "ecosystem", order: 5 },
+  { id: "playgrounds", title: "Swift Playgrounds", description: "Playgroundsによるインタラクティブな学習と検証", category: "ecosystem", order: 6 },
+  { id: "docc", title: "DocC", description: "DocCによるドキュメント生成と公開", category: "ecosystem", order: 7 },
+  { id: "version-history", title: "Swiftバージョン履歴", description: "Swift 1.0〜6.0の主要な変更点と進化", category: "ecosystem", order: 8 },
 ];
 
 export const CATEGORIES: CategoryInfo[] = [
