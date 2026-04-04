@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"for repo in code-learn-app python-learn-app csharp-learn-app cpp-learn-app java-learn-app go-learn-app ruby-learn-app swift-learn-app c-learn-app kotlin-learn-app php-learn-app dart-learn-...",
+  "error": "Exit code 1\nDeleting code-learn-app...\nHTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/machaniconico/code-learn-app)\nThis API operation needs the \"delete_repo\" scope. To request it, run:  gh auth refresh -h github.com -s delete_repo\nDeleting python-learn-app...\nHTTP 403: Must have admin rights to Repository. (https://api.github.com/repos/machaniconico/python-learn-app)\nThis API operation needs the \"delete_repo\" scope. To request it, run:  gh auth refresh -h github.c...",
+  "timestamp": "2026-04-04T04:44:30.167Z",
+  "retry_count": 1
+}
