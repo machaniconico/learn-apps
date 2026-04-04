@@ -251,49 +251,53 @@ export default function HomePage() {
             <p className="text-gray-400">同じシリーズの学習アプリで他の言語もマスターしよう</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            <a href="https://code-study-7bg.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://code-study-7bg.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🌐</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-indigo-400 transition-colors">JS / TS</span>
             </a>
-            <a href="https://python-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-green-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://python-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-green-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🐍</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-green-400 transition-colors">Python</span>
             </a>
-            <a href="https://csharp-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-purple-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://csharp-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-purple-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🔷</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-purple-400 transition-colors">C#</span>
             </a>
-            <a href="https://cpp-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-blue-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://cpp-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-blue-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">⚡</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-blue-400 transition-colors">C++</span>
             </a>
-            <a href="https://java-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-orange-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://java-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-orange-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">☕</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-orange-400 transition-colors">Java</span>
             </a>
-            <a href="https://go-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://go-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-cyan-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🐹</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-cyan-400 transition-colors">Go</span>
             </a>
-            <a href="https://c-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-slate-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://c-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-slate-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🔧</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-slate-400 transition-colors">C</span>
             </a>
-            <a href="https://swift-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-amber-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://swift-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-amber-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🐦</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-amber-400 transition-colors">Swift</span>
             </a>
-            <a href="https://kotlin-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-violet-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://kotlin-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-violet-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🟣</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-violet-400 transition-colors">Kotlin</span>
             </a>
-            <a href="https://php-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://php-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🐘</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-indigo-400 transition-colors">PHP</span>
             </a>
-            <a href="https://dart-learn-app.pages.dev/" target="_blank" rel="noopener noreferrer" className="group block bg-gray-900 border border-gray-800 hover:border-teal-500/50 rounded-xl p-5 text-center transition-colors">
+            <a href="https://dart-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-teal-500/50 rounded-xl p-5 text-center transition-colors">
               <span className="text-3xl mb-2 block">🎯</span>
               <span className="text-sm font-semibold text-gray-200 group-hover:text-teal-400 transition-colors">Dart</span>
+            </a>
+            <a href="https://sql-learn-app.pages.dev/" className="group block bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl p-5 text-center transition-colors">
+              <span className="text-3xl mb-2 block">🗃️</span>
+              <span className="text-sm font-semibold text-gray-200 group-hover:text-indigo-400 transition-colors">SQL</span>
             </a>
           </div>
         </div>
