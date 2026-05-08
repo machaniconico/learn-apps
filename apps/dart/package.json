@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@learn-apps/shared": "*",
     "@codemirror/autocomplete": "^6.20.1",
     "@codemirror/lang-javascript": "^6.2.3",
     "@codemirror/language": "^6.12.3",

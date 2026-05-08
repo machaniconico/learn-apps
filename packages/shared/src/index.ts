@@ -1,7 +1,13 @@
 export { ThemeProvider, useTheme } from "./components/theme-provider";
 export { ThemeToggle } from "./components/theme-toggle";
 export { LanguageCrossLinks } from "./components/language-cross-links";
+export { ProblemsPanel } from "./components/problems-panel";
 export { createProgressManager } from "./lib/progress";
 export { languages, getOtherLanguages } from "./lib/languages";
+export { checkBrackets, checkTypos, checkBlockPairs, checkUnclosedStrings, checkConditionAssignment, checkMissingPattern, checkMissingSemicolons } from "./lib/lint";
+export { executeCode } from "./lib/code-runner";
+export { createEditorLinter } from "./lib/editor-linter";
+export type { ExecutionResult } from "./lib/code-runner";
 export type { LanguageConfig } from "./lib/languages";
 export type { LessonProgress, CategoryProgress, UserProgress } from "./lib/progress";
+export type { LintMessage, BracketCheckOptions } from "./lib/lint";

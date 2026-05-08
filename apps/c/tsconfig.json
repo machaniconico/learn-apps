@@ -25,7 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@learn-apps/shared": ["../../packages/shared/src"],
+      "@learn-apps/shared/*": ["../../packages/shared/src/*"]
     }
   },
   "include": [

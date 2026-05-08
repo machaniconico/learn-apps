@@ -10,6 +10,13 @@
     "./lib/*": "./src/lib/*",
     "./styles/*": "./src/styles/*"
   },
+  "typesVersions": {
+    "*": {
+      "components/*": ["./src/components/*"],
+      "lib/*": ["./src/lib/*"],
+      "styles/*": ["./src/styles/*"]
+    }
+  },
   "dependencies": {
     "react": "19.2.4",
     "react-dom": "19.2.4"

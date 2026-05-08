@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@learn-apps/shared": ["../../packages/shared/src/index.ts"],
+      "@learn-apps/shared/*": ["../../packages/shared/src/*"]
     }
   },
   "include": [
