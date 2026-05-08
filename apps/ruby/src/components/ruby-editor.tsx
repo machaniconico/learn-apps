@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { basicSetup } from "codemirror";
+import { ProblemsPanel, executeCode, createEditorLinter } from "@learn-apps/shared";
+import type { LintMessage } from "@learn-apps/shared";
+import { lintRuby } from "../lib/linter";
 
 interface RubyEditorProps {
   defaultCode?: string;
@@ -24,9 +27,45 @@ squares = numbers.map { |n| n ** 2 }
 puts squares.inspect
 `;
 
-export function RubyEditor({ defaultCode = DEFAULT_CODE, height = "300px", expectedOutput }: RubyEditorProps) {
+export function RubyEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: RubyEditorProps) {
   const [code, setCode] = useState(defaultCode);
-  const [showOutput, setShowOutput] = useState(false);
+  const [output, setOutput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [problems, setProblems] = useState<LintMessage[]>([]);
+  const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
+
+  const lintExtension = useMemo(
+    () => createEditorLinter(lintRuby, setProblems),
+    [],
+  );
+
+  const runCode = useCallback(async () => {
+    setLoading(true);
+    setOutput("");
+    setRuntimeErrors([]);
+
+    try {
+      const result = await executeCode("ruby", code);
+      const parts: string[] = [];
+      if (result.compilationError) {
+        parts.push(result.compilationError);
+        setRuntimeErrors((prev) => [...prev.slice(-4), result.compilationError!]);
+      } else {
+        if (result.stdout) parts.push(result.stdout);
+        if (result.stderr) {
+          parts.push(result.stderr);
+          setRuntimeErrors((prev) => [...prev.slice(-4), result.stderr]);
+        }
+      }
+      setOutput(parts.join("") || "(出力なし)");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setOutput(`実行エラー: ${msg}`);
+      setRuntimeErrors((prev) => [...prev.slice(-4), msg]);
+    } finally {
+      setLoading(false);
+    }
+  }, [code]);
 
   return (
     <div className="rounded-xl border border-gray-700 overflow-hidden bg-gray-900">
@@ -36,33 +75,64 @@ export function RubyEditor({ defaultCode = DEFAULT_CODE, height = "300px", expec
           <span className="text-gray-500 text-xs">エディタ</span>
         </div>
         <div className="flex items-center gap-2">
-          {showOutput && (
-            <button onClick={() => setShowOutput(false)} className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors">クリア</button>
+          <button
+            onClick={() => setCode(defaultCode)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+          >
+            リセット
+          </button>
+          <button
+            onClick={() => setCode("")}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+          >
+            全消去
+          </button>
+          {output && (
+            <button
+              onClick={() => { setOutput(""); setRuntimeErrors([]); }}
+              className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+            >
+              クリア
+            </button>
           )}
-          <button onClick={() => setShowOutput(true)} className="flex items-center gap-1.5 bg-red-600 hover:bg-red-500 text-white text-sm font-medium px-3 py-1.5 rounded transition-colors">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none" /></svg>
-            実行
+          <button
+            onClick={runCode}
+            disabled={loading}
+            className="flex items-center gap-1.5 bg-red-600 hover:bg-red-500 disabled:bg-red-800 disabled:cursor-not-allowed text-white text-sm font-medium px-3 py-1.5 rounded transition-colors"
+          >
+            {loading ? (
+              <>
+                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                実行中...
+              </>
+            ) : (
+              <>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <polygon points="5,3 19,12 5,21" fill="currentColor" stroke="none" />
+                </svg>
+                実行
+              </>
+            )}
           </button>
         </div>
       </div>
-      <CodeMirror value={code} height={height} extensions={[javascript(), basicSetup]} theme={oneDark} onChange={(val) => setCode(val)} className="text-sm" />
-      {showOutput && expectedOutput && (
+      <CodeMirror value={code} height={height} extensions={[lintExtension, javascript(), basicSetup]} theme={oneDark} onChange={setCode} className="text-sm" />
+      <ProblemsPanel problems={problems} runtimeErrors={runtimeErrors} />
+      {(output || loading) && (
         <div className="border-t border-gray-700">
           <div className="flex items-center gap-2 px-4 py-1.5 bg-gray-800/50 border-b border-gray-700">
-            <span className="text-xs font-medium text-gray-400">実行結果（期待される出力）</span>
+            <span className="text-xs font-medium text-gray-400">出力</span>
           </div>
-          <pre className="px-4 py-3 text-sm font-mono text-gray-200 bg-gray-950 min-h-[60px] max-h-64 overflow-auto whitespace-pre-wrap">{expectedOutput}</pre>
-        </div>
-      )}
-      {showOutput && !expectedOutput && (
-        <div className="border-t border-gray-700">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-gray-800/50 border-b border-gray-700">
-            <span className="text-xs font-medium text-gray-400">情報</span>
-          </div>
-          <div className="px-4 py-3 text-sm text-gray-400 bg-gray-950">
-            <p>Rubyはブラウザ上では実行できません。コードの動作を確認するには、Rubyをインストールしてローカル環境で実行してください。</p>
-            <p className="mt-1 text-xs text-gray-500"><code className="bg-gray-800 px-1.5 py-0.5 rounded">ruby main.rb</code> コマンドで実行できます。</p>
-          </div>
+          <pre className="px-4 py-3 text-sm font-mono text-gray-200 bg-gray-950 min-h-[60px] max-h-64 overflow-auto whitespace-pre-wrap">
+            {loading && !output ? (
+              <span className="text-gray-500">実行中...</span>
+            ) : (
+              output
+            )}
+          </pre>
         </div>
       )}
     </div>

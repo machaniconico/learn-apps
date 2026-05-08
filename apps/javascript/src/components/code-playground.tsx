@@ -824,6 +824,12 @@ export function CodePlayground({
     setPreviewKey((k) => k + 1);
   }, [defaultHtml, defaultCss, defaultJs]);
 
+  const clearCode = useCallback(() => {
+    if (activeTab === "html") setHtmlCode("");
+    else if (activeTab === "css") setCssCode("");
+    else setJsCode("");
+  }, [activeTab]);
+
   const copyCode = useCallback(async () => {
     const code = activeTab === "html" ? codeRef.current.html : activeTab === "css" ? codeRef.current.css : codeRef.current.js;
     try {
@@ -986,6 +992,13 @@ export function CodePlayground({
             className="rounded-md border border-gray-700 px-3 py-1.5 text-sm text-gray-200 transition-colors hover:border-gray-500 hover:bg-gray-800"
           >
             リセット
+          </button>
+          <button
+            type="button"
+            onClick={clearCode}
+            className="rounded-md border border-gray-700 px-3 py-1.5 text-sm text-gray-200 transition-colors hover:border-gray-500 hover:bg-gray-800"
+          >
+            全消去
           </button>
           <button
             type="button"

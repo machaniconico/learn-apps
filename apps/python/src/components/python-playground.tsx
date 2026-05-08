@@ -5,6 +5,9 @@ import CodeMirror from "@uiw/react-codemirror";
 import { python } from "@codemirror/lang-python";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { basicSetup } from "codemirror";
+import { ProblemsPanel } from "@learn-apps/shared/components/problems-panel";
+import type { LintMessage } from "@learn-apps/shared/lib/lint";
+import { lintPython } from "../lib/linter";
 
 interface PythonPlaygroundProps {
   defaultCode?: string;
@@ -41,6 +44,8 @@ export function PythonPlayground({ defaultCode = DEFAULT_CODE, height = "300px" 
   const [loading, setLoading] = useState(false);
   const [pyodideReady, setPyodideReady] = useState(false);
   const [pyodideError, setPyodideError] = useState(false);
+  const [problems, setProblems] = useState<LintMessage[]>([]);
+  const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
   const pyodideRef = useRef<unknown>(null);
 
   const loadPyodideInstance = useCallback(async () => {
@@ -70,6 +75,7 @@ export function PythonPlayground({ defaultCode = DEFAULT_CODE, height = "300px" 
   const runCode = useCallback(async () => {
     setLoading(true);
     setOutput("");
+    setRuntimeErrors([]);
     setPyodideError(false);
 
     try {
@@ -95,6 +101,7 @@ sys.stderr = _stderr_capture
         // Execution error - capture it
         const errMsg = err instanceof Error ? err.message : String(err);
         captured.push(`[エラー] ${errMsg}`);
+        setRuntimeErrors(prev => [...prev.slice(-4), errMsg]);
       }
 
       const stdout: string = pyodide.runPython("_stdout_capture.getvalue()");
@@ -130,6 +137,18 @@ sys.stderr = sys.__stderr__
           <span className="text-gray-500 text-xs">プレイグラウンド</span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setCode(defaultCode)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+          >
+            リセット
+          </button>
+          <button
+            onClick={() => setCode("")}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+          >
+            全消去
+          </button>
           {output && (
             <button
               onClick={() => setOutput("")}
@@ -169,9 +188,11 @@ sys.stderr = sys.__stderr__
         height={height}
         extensions={[python(), basicSetup]}
         theme={oneDark}
-        onChange={(val) => setCode(val)}
+        onChange={(val) => { setCode(val); setProblems(lintPython(val)); }}
         className="text-sm"
       />
+
+      <ProblemsPanel problems={problems} runtimeErrors={runtimeErrors} />
 
       {/* Output */}
       {(output || loading) && (
