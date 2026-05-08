@@ -3,6 +3,7 @@ import { useState, useCallback, useMemo } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { php } from "@codemirror/lang-php";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { placeholder as cmPlaceholder } from "@codemirror/view";
 import { basicSetup } from "codemirror";
 import { ProblemsPanel, executeCode, createEditorLinter } from "@learn-apps/shared";
 import type { LintMessage } from "@learn-apps/shared";
@@ -30,6 +31,12 @@ export function PhpEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: PhpE
   const [loading, setLoading] = useState(false);
   const [problems, setProblems] = useState<LintMessage[]>([]);
   const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
+  const [showHint, setShowHint] = useState(true);
+
+  const placeholderExtension = useMemo(
+    () => cmPlaceholder(defaultCode),
+    [defaultCode],
+  );
 
   const lintExtension = useMemo(
     () => createEditorLinter(lintPhp, setProblems),
@@ -72,6 +79,13 @@ export function PhpEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: PhpE
           <span className="text-gray-500 text-xs">エディタ</span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowHint((v) => !v)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+            title={`ヒント: ${showHint ? "ON" : "OFF"}`}
+          >
+            💡 {showHint ? "ON" : "OFF"}
+          </button>
           <button
             onClick={() => setCode(defaultCode)}
             className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
@@ -116,7 +130,7 @@ export function PhpEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: PhpE
           </button>
         </div>
       </div>
-      <CodeMirror value={code} height={height} extensions={[lintExtension, php(), basicSetup]} theme={oneDark} onChange={setCode} className="text-sm" />
+      <CodeMirror value={code} height={height} extensions={[lintExtension, php(), basicSetup, ...(showHint ? [placeholderExtension] : [])]} theme={oneDark} onChange={setCode} className="text-sm" />
       <ProblemsPanel problems={problems} runtimeErrors={runtimeErrors} />
       {(output || loading) && (
         <div className="border-t border-gray-700">

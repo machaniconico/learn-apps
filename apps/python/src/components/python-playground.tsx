@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { python } from "@codemirror/lang-python";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { placeholder as cmPlaceholder } from "@codemirror/view";
 import { basicSetup } from "codemirror";
 import { ProblemsPanel } from "@learn-apps/shared/components/problems-panel";
 import type { LintMessage } from "@learn-apps/shared/lib/lint";
@@ -46,7 +47,13 @@ export function PythonPlayground({ defaultCode = DEFAULT_CODE, height = "300px" 
   const [pyodideError, setPyodideError] = useState(false);
   const [problems, setProblems] = useState<LintMessage[]>([]);
   const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
+  const [showHint, setShowHint] = useState(true);
   const pyodideRef = useRef<unknown>(null);
+
+  const placeholderExtension = useMemo(
+    () => cmPlaceholder(defaultCode),
+    [defaultCode],
+  );
 
   const loadPyodideInstance = useCallback(async () => {
     if (pyodideRef.current) return pyodideRef.current;
@@ -138,6 +145,13 @@ sys.stderr = sys.__stderr__
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setShowHint((v) => !v)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+            title={`ヒント: ${showHint ? "ON" : "OFF"}`}
+          >
+            💡 {showHint ? "ON" : "OFF"}
+          </button>
+          <button
             onClick={() => setCode(defaultCode)}
             className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
           >
@@ -186,7 +200,7 @@ sys.stderr = sys.__stderr__
       <CodeMirror
         value={code}
         height={height}
-        extensions={[python(), basicSetup]}
+        extensions={[python(), basicSetup, ...(showHint ? [placeholderExtension] : [])]}
         theme={oneDark}
         onChange={(val) => { setCode(val); setProblems(lintPython(val)); }}
         className="text-sm"

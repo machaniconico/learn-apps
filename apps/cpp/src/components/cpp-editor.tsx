@@ -8,6 +8,7 @@ import { lintCpp } from "../lib/linter";
 import { StreamLanguage } from "@codemirror/language";
 import { clike } from "@codemirror/legacy-modes/mode/clike";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { placeholder as cmPlaceholder } from "@codemirror/view";
 import { basicSetup } from "codemirror";
 
 interface CppEditorProps {
@@ -82,6 +83,12 @@ export function CppEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: CppE
   const [loading, setLoading] = useState(false);
   const [problems, setProblems] = useState<LintMessage[]>([]);
   const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
+  const [showHint, setShowHint] = useState(true);
+
+  const placeholderExtension = useMemo(
+    () => cmPlaceholder(defaultCode),
+    [defaultCode],
+  );
 
   const lintExtension = useMemo(
     () => createEditorLinter(lintCpp, setProblems),
@@ -124,6 +131,13 @@ export function CppEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: CppE
           <span className="text-gray-500 text-xs">エディタ</span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowHint((v) => !v)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+            title={`ヒント: ${showHint ? "ON" : "OFF"}`}
+          >
+            💡 {showHint ? "ON" : "OFF"}
+          </button>
           <button
             onClick={() => setCode(defaultCode)}
             className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
@@ -171,7 +185,7 @@ export function CppEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: CppE
       <CodeMirror
         value={code}
         height={height}
-        extensions={[lintExtension, cppLanguage, basicSetup]}
+        extensions={[lintExtension, cppLanguage, basicSetup, ...(showHint ? [placeholderExtension] : [])]}
         theme={oneDark}
         onChange={setCode}
         className="text-sm"

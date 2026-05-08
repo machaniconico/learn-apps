@@ -3,6 +3,7 @@ import { useState, useCallback, useMemo } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { placeholder as cmPlaceholder } from "@codemirror/view";
 import { basicSetup } from "codemirror";
 import { ProblemsPanel, executeCode, createEditorLinter } from "@learn-apps/shared";
 import type { LintMessage } from "@learn-apps/shared";
@@ -31,6 +32,12 @@ export function KotlinEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: K
   const [loading, setLoading] = useState(false);
   const [problems, setProblems] = useState<LintMessage[]>([]);
   const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
+  const [showHint, setShowHint] = useState(true);
+
+  const placeholderExtension = useMemo(
+    () => cmPlaceholder(defaultCode),
+    [defaultCode],
+  );
 
   const lintExtension = useMemo(
     () => createEditorLinter(lintKotlin, setProblems),
@@ -73,6 +80,13 @@ export function KotlinEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: K
           <span className="text-gray-500 text-xs">エディタ</span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowHint((v) => !v)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+            title={`ヒント: ${showHint ? "ON" : "OFF"}`}
+          >
+            💡 {showHint ? "ON" : "OFF"}
+          </button>
           <button
             onClick={() => setCode(defaultCode)}
             className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
@@ -117,7 +131,7 @@ export function KotlinEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: K
           </button>
         </div>
       </div>
-      <CodeMirror value={code} height={height} extensions={[java(), basicSetup, lintExtension]} theme={oneDark} onChange={(val) => { setCode(val); }} className="text-sm" />
+      <CodeMirror value={code} height={height} extensions={[java(), basicSetup, lintExtension, ...(showHint ? [placeholderExtension] : [])]} theme={oneDark} onChange={(val) => { setCode(val); }} className="text-sm" />
       <ProblemsPanel problems={problems} runtimeErrors={runtimeErrors} />
       {(output || loading) && (
         <div className="border-t border-gray-700">

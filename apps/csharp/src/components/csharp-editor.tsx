@@ -5,6 +5,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { StreamLanguage } from "@codemirror/language";
 import { clike } from "@codemirror/legacy-modes/mode/clike";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { placeholder as cmPlaceholder } from "@codemirror/view";
 import { basicSetup } from "codemirror";
 import { ProblemsPanel, executeCode, createEditorLinter } from "@learn-apps/shared";
 import type { LintMessage } from "@learn-apps/shared";
@@ -78,6 +79,12 @@ export function CSharpEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: C
   const [loading, setLoading] = useState(false);
   const [problems, setProblems] = useState<LintMessage[]>([]);
   const [runtimeErrors, setRuntimeErrors] = useState<string[]>([]);
+  const [showHint, setShowHint] = useState(true);
+
+  const placeholderExtension = useMemo(
+    () => cmPlaceholder(defaultCode),
+    [defaultCode],
+  );
 
   const lintExtension = useMemo(
     () => createEditorLinter(lintCsharp, setProblems),
@@ -121,6 +128,13 @@ export function CSharpEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: C
           <span className="text-gray-500 text-xs">エディタ</span>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowHint((v) => !v)}
+            className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+            title={`ヒント: ${showHint ? "ON" : "OFF"}`}
+          >
+            💡 {showHint ? "ON" : "OFF"}
+          </button>
           <button
             onClick={() => setCode(defaultCode)}
             className="text-xs text-gray-400 hover:text-gray-200 px-2 py-1 rounded hover:bg-gray-700 transition-colors"
@@ -170,7 +184,7 @@ export function CSharpEditor({ defaultCode = DEFAULT_CODE, height = "300px" }: C
       <CodeMirror
         value={code}
         height={height}
-        extensions={[csharpLanguage, basicSetup, lintExtension]}
+        extensions={[csharpLanguage, basicSetup, lintExtension, ...(showHint ? [placeholderExtension] : [])]}
         theme={oneDark}
         onChange={(val) => { setCode(val); }}
         className="text-sm"

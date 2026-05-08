@@ -7,7 +7,7 @@ import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
-import { keymap } from "@codemirror/view";
+import { keymap, placeholder as cmPlaceholder } from "@codemirror/view";
 import { linter, type Diagnostic } from "@codemirror/lint";
 import { ExportMenu } from "./export-menu";
 
@@ -778,6 +778,7 @@ export function CodePlayground({
   const [copyStatus, setCopyStatus] = useState<"idle" | "done">("idle");
   const [jsErrors, setJsErrors] = useState<string[]>([]);
   const [problems, setProblems] = useState<LintMessage[]>([]);
+  const [showHint, setShowHint] = useState(true);
 
   const codeRef = useRef({ html: defaultHtml, css: defaultCss, js: defaultJs });
 
@@ -909,6 +910,9 @@ export function CodePlayground({
       },
     });
 
+    const placeholderForTab =
+      activeTab === "html" ? defaultHtml : activeTab === "css" ? defaultCss : defaultJs;
+
     const state = EditorState.create({
       doc: initialCode,
       extensions: [
@@ -920,6 +924,7 @@ export function CodePlayground({
         updateListener,
         runKeymap,
         EditorView.lineWrapping,
+        ...(showHint ? [cmPlaceholder(placeholderForTab)] : []),
       ],
     });
 
@@ -934,7 +939,8 @@ export function CodePlayground({
       view.destroy();
       editorViewRef.current = null;
     };
-  }, [activeTab]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, showHint]);
 
   // Sync editor content when reset
   useEffect(() => {
@@ -985,6 +991,14 @@ export function CodePlayground({
             className="rounded-md border border-gray-700 px-3 py-1.5 text-sm text-gray-200 transition-colors hover:border-gray-500 hover:bg-gray-800"
           >
             {copyStatus === "done" ? "コピー済み" : "コピー"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowHint((v) => !v)}
+            className="rounded-md border border-gray-700 px-3 py-1.5 text-sm text-gray-200 transition-colors hover:border-gray-500 hover:bg-gray-800"
+            title={`ヒント: ${showHint ? "ON" : "OFF"}`}
+          >
+            💡 {showHint ? "ON" : "OFF"}
           </button>
           <button
             type="button"
